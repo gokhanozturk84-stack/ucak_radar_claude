@@ -592,13 +592,16 @@ void setup() {
   initFilter();
   acMutex = xSemaphoreCreateMutex();
 
+  Serial.println("1) ekran baslatiliyor");
   tft.init();
+  Serial.println("2) ekran tamam");
   tft.setRotation(0);
   tft.fillScreen(TFT_BLACK);
   spr.setColorDepth(8);
   sprOk = spr.createSprite(240, 240) != nullptr;
-  if (!sprOk) Serial.println("Sprite olusturulamadi (bellek)");
+  Serial.println(sprOk ? "3) sprite tamam" : "3) Sprite olusturulamadi (bellek)");
 
+  Serial.println("4) WiFi AP baslatiliyor");
   WiFi.persistent(false);
   WiFi.setHostname("ucakradar");
   WiFi.mode(WIFI_AP_STA);

@@ -1,6 +1,6 @@
 """Derleme sonrasi: bootloader + partitions + boot_app0 + uygulama -> tek dosya.
 
-Cikti: <proje>/firmware_merged.bin  (0x0 adresine yazilir)
+Cikti: <proje>/firmware_merged_<env>.bin  (0x0 adresine yazilir)
 """
 import os
 import subprocess
@@ -19,7 +19,8 @@ def merge_bin(source, target, env):  # noqa: ARG001
     boot_app0 = os.path.join(fw_dir, "tools", "partitions", "boot_app0.bin")
     esptool = os.path.join(platform.get_package_dir("tool-esptoolpy"), "esptool.py")
 
-    out = os.path.join(env.subst("$PROJECT_DIR"), "firmware_merged.bin")
+    out = os.path.join(env.subst("$PROJECT_DIR"),
+                       "firmware_merged_%s.bin" % env.subst("$PIOENV"))
 
     cmd = [
         env.subst("$PYTHONEXE"), esptool,

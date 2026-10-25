@@ -19,19 +19,20 @@ Farklı pin istersen `platformio.ini` içindeki `-DTFT_*` değerlerini değişti
 ## 2) `.bin` dosyasını elde etme
 
 **A) GitHub ile (kurulum gerektirmez):** Bu klasörü yeni bir GitHub deposuna yükle →
-**Actions** sekmesi → son çalışma → **Artifacts** → `ucak-radar-firmware` → içinden `firmware_merged.bin`.
+**Actions** sekmesi → son çalışma → **Artifacts** → `ucak-radar-firmware` → içinden `firmware_merged_esp32c3_vspi.bin`.
 
 **B) Kendi bilgisayarında:**
 ```
 pip install platformio
 pio run
 ```
-Çıktı proje klasöründe: `firmware_merged.bin`
+Çıktı proje klasöründe: `firmware_merged_esp32c3_vspi.bin` ve `firmware_merged_esp32c3_hspi.bin`
+(önce `vspi` olanı dene; çöküyorsa ya da ekran boşsa `hspi` olanı dene).
 
 ## 3) ESP32-C3'e yükleme (tek dosya, 0x0 adresine)
 
-* **Tarayıcıdan:** Chrome/Edge ile <https://web.esphome.io> → cihazı USB ile bağla → *Connect* → *Install* → `firmware_merged.bin` seç.
-* **Komut satırı:** `esptool.py --chip esp32c3 --port COM5 write_flash 0x0 firmware_merged.bin`
+* **Tarayıcıdan:** Chrome/Edge ile <https://web.esphome.io> → cihazı USB ile bağla → *Connect* → *Install* → `firmware_merged_esp32c3_vspi.bin` seç.
+* **Komut satırı:** `esptool.py --chip esp32c3 --port COM5 write_flash 0x0 firmware_merged_esp32c3_vspi.bin`
 
 Port görünmezse BOOT tuşuna basılı tutarak USB'yi tak.
 
