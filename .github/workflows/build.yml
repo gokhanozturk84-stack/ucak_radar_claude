@@ -23,13 +23,13 @@ jobs:
       - name: PlatformIO kur
         run: pip install platformio
 
-      - name: Derle (firmware_merged.bin olusur)
+      - name: Derle (iki surum: vspi ve hspi)
         run: pio run
 
       - name: Boyutu goster
-        run: ls -l firmware_merged.bin
+        run: ls -l firmware_merged_*.bin
 
       - uses: actions/upload-artifact@v4
         with:
           name: ucak-radar-firmware
-          path: firmware_merged.bin
+          path: firmware_merged_*.bin
